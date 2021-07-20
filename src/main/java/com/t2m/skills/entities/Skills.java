@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,9 +24,9 @@ public class Skills {
 	@Column(name = "nome")
     private String skillsNome;
 	
-	//@ManyToOne
-	//@JoinColumn (name="id_categoria", referencedColumnName="id")
-	//private Categorias skillCategoria;
+	@ManyToOne
+	@JoinColumn (name="id_categoria", referencedColumnName="id")
+	private Categorias skillCategoria;
 	
 	@ManyToMany
 	@JoinTable(
@@ -33,7 +34,7 @@ public class Skills {
 	  joinColumns = @JoinColumn(name = "id", referencedColumnName = "id_skill"),
 	  inverseJoinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id")
 	)
-	private List<Profissionais> listFilm;
+	private List<Profissionais> listaProfissionais;
 
 	public Long getSkillsId() {
 		return skillsId;
@@ -50,15 +51,24 @@ public class Skills {
 	public void setSkillsNome(String skillsNome) {
 		this.skillsNome = skillsNome;
 	}
-/*
+
 	public Categorias getCategoria() {
-		return categoria;
+		return skillCategoria;
 	}
 
 	public void setCategoria(Categorias categoria) {
-		this.categoria = categoria;
+		this.skillCategoria = categoria;
 	}
 
-	*/
+	
+
+	public List<Profissionais> getListaProfissionais() {
+		return listaProfissionais;
+	}
+
+	public void setListaProfissionais(List<Profissionais> listaProfissionais) {
+		this.listaProfissionais = listaProfissionais;
+	}
+	
 	
 }
